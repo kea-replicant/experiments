@@ -112,12 +112,14 @@ ul {
     top: 0;
     z-index: 1000;
     padding: var(--spacing-sm) 0;
+    overflow: visible;
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: visible;
 }
 
 .nav-brand .logo {
@@ -153,15 +155,19 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: none;
-    border: none;
+    background: rgba(0, 0, 0, 0.03);
+    border: 2px solid transparent;
     cursor: pointer;
     padding: 10px;
-    z-index: 1001;
-    min-width: 44px;
-    min-height: 44px;
+    z-index: 10000;
+    min-width: 48px;
+    min-height: 48px;
     position: relative;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .nav-toggle:hover {
