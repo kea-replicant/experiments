@@ -147,6 +147,39 @@ ul {
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 }
 
+/* Hamburger Menu Toggle (Hidden by default on desktop) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--color-dark);
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+/* Hamburger animation when active */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
     background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
@@ -808,22 +841,53 @@ ul {
         padding: 0 var(--spacing-sm);
     }
 
-    /* Navigation - Stack vertically */
+    /* Navigation - Hamburger Menu */
     .navbar {
         padding: var(--spacing-sm) 0;
     }
 
+    .navbar .container {
+        position: relative;
+    }
+
+    /* Show hamburger button on mobile */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Hide menu by default on mobile */
     .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-white);
         flex-direction: column;
-        gap: var(--spacing-xs);
+        gap: 0;
         width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: var(--shadow-natural);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    /* Show menu when active */
+    .nav-menu.active {
+        max-height: 300px;
         padding: var(--spacing-sm) 0;
+    }
+
+    .nav-menu li {
+        margin: 0;
     }
 
     .nav-menu a {
         display: block;
         text-align: center;
         padding: var(--spacing-sm);
+        border-radius: 0;
     }
 
     /* Hero Section */

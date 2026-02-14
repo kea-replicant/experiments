@@ -5,6 +5,36 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    // ===== MOBILE HAMBURGER MENU =====
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            // Toggle active class on button and menu
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navToggle.contains(event.target) || navMenu.contains(event.target);
+            if (!isClickInsideNav && navMenu.classList.contains('active')) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
     // ===== EXPERIMENT SEARCH & FILTER =====
     const searchInput = document.getElementById('searchInput');
     const filterTags = document.querySelectorAll('.filter-tag');
