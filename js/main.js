@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isClickInsideNav && navMenu.classList.contains('active')) {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
-            });
+            }
         });
     }
 
