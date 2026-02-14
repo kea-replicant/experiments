@@ -6,33 +6,42 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // ===== MOBILE HAMBURGER MENU =====
+    console.log('🦜 Initializing hamburger menu...');
+
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
+    console.log('Nav toggle found:', navToggle);
+    console.log('Nav menu found:', navMenu);
+
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            // Toggle active class on button and menu
+        // Simple toggle on click
+        navToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🍔 Hamburger clicked!');
+
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
+
+            console.log('Menu active:', navMenu.classList.contains('active'));
         });
 
         // Close menu when clicking on a link
         const navLinks = navMenu.querySelectorAll('a');
+        console.log('Found', navLinks.length, 'navigation links');
+
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
+                console.log('Link clicked, closing menu');
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = navToggle.contains(event.target) || navMenu.contains(event.target);
-            if (!isClickInsideNav && navMenu.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
+    } else {
+        console.error('❌ Hamburger menu elements not found!');
+        console.error('navToggle:', navToggle);
+        console.error('navMenu:', navMenu);
     }
 
     // ===== EXPERIMENT SEARCH & FILTER =====
