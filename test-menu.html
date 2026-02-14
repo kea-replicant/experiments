@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Hamburger Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Hamburger Button */
+        .nav-toggle {
+            display: flex;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Menu */
+        .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 1px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            z-index: 999;
+        }
+
+        .nav-menu.active {
+            max-height: 300px;
+            padding: 1rem 0;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-menu a:hover {
+            background: #f0f0f0;
+        }
+
+        .test-info {
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .status {
+            background: #f0f0f0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🦜 Test Menu</div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="alert('Link 1 clicked!'); return false;">Link 1</a></li>
+                <li><a href="#" onclick="alert('Link 2 clicked!'); return false;">Link 2</a></li>
+                <li><a href="#" onclick="alert('Link 3 clicked!'); return false;">Link 3</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="test-info">
+        <h1>🧪 Test Hamburger Menu</h1>
+        <p>Kliknij przycisk hamburger (3 linie) w prawym górnym rogu.</p>
+
+        <div class="status" id="status">
+            Status: Ładowanie...
+        </div>
+
+        <h2>Co powinno się stać:</h2>
+        <ol>
+            <li>✅ Hamburger powinien się pokazać</li>
+            <li>✅ Po kliknięciu menu się wysuwa</li>
+            <li>✅ Hamburger zamienia się w X</li>
+            <li>✅ Po kliknięciu linku menu się chowa</li>
+        </ol>
+    </div>
+
+    <script>
+        console.log('🦜 Test page loaded');
+
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const statusDiv = document.getElementById('status');
+
+        if (navToggle && navMenu) {
+            statusDiv.textContent = '✅ Status: Elementy znalezione! Hamburger powinien działać.';
+
+            navToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('🍔 Hamburger clicked!');
+
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+
+                const isActive = navMenu.classList.contains('active');
+                console.log('Menu active:', isActive);
+
+                statusDiv.textContent = isActive
+                    ? '✅ Menu OTWARTE'
+                    : '📍 Menu ZAMKNIĘTE';
+            });
+
+            // Close on link click
+            const navLinks = navMenu.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    statusDiv.textContent = '📍 Menu zamknięte (kliknięto link)';
+                });
+            });
+
+            console.log('✅ Event listeners attached');
+        } else {
+            statusDiv.textContent = '❌ Błąd: Nie znaleziono elementów!';
+            console.error('Elements not found:', { navToggle, navMenu });
+        }
+    </script>
+</body>
+</html>
