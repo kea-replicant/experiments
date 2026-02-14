@@ -1,0 +1,11 @@
+# robots.txt - OpenClaw Lab
+# Currently blocking all search engine indexing
+# To enable indexing later, replace this file with a permissive version
+
+User-agent: *
+Disallow: /
+
+# Uncomment lines below when ready for indexing:
+# User-agent: *
+# Allow: /
+# Sitemap: https://parrotsclaw.com/sitemap.xml
